@@ -3,6 +3,4 @@
  * @author netcon
  */
 
-import TypeORM from 'typeorm';
-
-export const orm = TypeORM;
+module.exports = require('typeorm');

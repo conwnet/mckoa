@@ -3,7 +3,7 @@
  * @author netcon
  */
 
+export orm from 'typeorm';
+export router from './router';
 export * from './controllers';
 export * from './models';
-export * from './router';
-export * from './orm';
