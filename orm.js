@@ -3,4 +3,6 @@
  * @author netcon
  */
 
-module.exports = require('typeorm');
+import TypeORM from 'typeorm';
+
+export default TypeORM;

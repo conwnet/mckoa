@@ -1,30 +1,8 @@
 /**
- * Controller 路由装饰器
- * @param {Array} methods HTTP 方法列表
+ * @file 导出路由装饰器
+ * @author netcon
  */
 
-const createRouter = methods => {
-    const router = {
-        prefix: prefix => Class => {
-            Class.$$prefix = prefix;
-        }
-    };
+import router from './src/router';
 
-    methods.forEach(method => {
-        router[method] = path => (target, property) => {
-            if (!target.$$routes) {
-                target.$$routes = [];
-            }
-
-            target.$$routes.push({
-                path,
-                method: method,
-                action: target[property]
-            });
-        }
-    });
-
-    return router;
-};
-
-module.exports = createRouter(['get', 'post', 'put', 'delete', 'all']);
+export default router;

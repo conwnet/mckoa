@@ -1,6 +1,6 @@
 /**
- * Controller 路由装饰器
- * @param {Array} methods HTTP 方法列表
+ * @file 路由装饰器
+ * @author netcon
  */
 
 const createRouter = methods => {

@@ -48,7 +48,7 @@ export const controllers = (options = {}) => {
             // 设置通过装饰器设置的路由
             controller.$$routes && controller.$$routes.forEach(({path, method, action}) => {
                 definedActions.add(action);
-                router[method](join(prefix, path), handleAction(action));
+                router[method](join(prefix, path), handleAction(action.bind(controller)));
             });
 
             // 设置类中 xxxAction 方法的路由
@@ -59,10 +59,10 @@ export const controllers = (options = {}) => {
                 if (!definedActions.has(action)) {
                     // indexAction 可以直接映射
                     if (name === 'indexAction') {
-                        router.all(prefix, handleAction(action));
+                        router.all(prefix, handleAction(action.bind(controller)));
                     }
 
-                    router.all(join(prefix, name.slice(0, -6)), handleAction(action));
+                    router.all(join(prefix, name.slice(0, -6)), handleAction(action.bind(controller)));
                 }
             });
         }
