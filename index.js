@@ -17,4 +17,13 @@ require("@babel/register")({
     ]
 });
 
-module.exports = require('./src');
+const orm = require('typeorm');
+const {controllers, models, router, Controller} = require('./src');
+
+module.exports = {
+    controllers,
+    models,
+    router,
+    Controller,
+    orm
+};

@@ -28,7 +28,7 @@ const handleAction = action => async (ctx, next) => {
     ctx.body = await action(ctx, next);
 };
 
-export const controllers = (options = {}) => {
+const controllers = (options = {}) => {
     const dir = resolve(dirname(require.main.filename), options.path || './src/controllers');
     const router = new Router(options.router);
 
@@ -70,3 +70,5 @@ export const controllers = (options = {}) => {
 
     return router.routes();
 };
+
+export default controllers;

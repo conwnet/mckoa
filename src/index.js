@@ -1,9 +1,9 @@
 /**
- * @file 使用 ES Modules 处理导出
+ * @file 导出 mckoa 对外暴露的内容
  * @author netcon
  */
 
-export orm from 'typeorm';
+export controllers from './controllers';
+export models from './models';
 export router from './router';
-export * from './controllers';
-export * from './models';
+export Controller from './Controller';

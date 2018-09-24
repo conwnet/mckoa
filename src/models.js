@@ -16,7 +16,7 @@ import {
     createClassImportError
 } from './error';
 
-export const models = async (options = {}) => {
+const models = async (options = {}) => {
     const dir = resolve(dirname(require.main.filename), options.path || './src/models');
     const entities = [], names = [], models = {};
 
@@ -45,3 +45,5 @@ export const models = async (options = {}) => {
         await next();
     };
 };
+
+export default models;

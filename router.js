@@ -3,6 +3,6 @@
  * @author netcon
  */
 
-import router from './src/router';
+const router = require('./src/router');
 
-export default router;
+module.exports = router.default || router;
