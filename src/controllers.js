@@ -44,11 +44,15 @@ const controllers = (options = {}) => {
             const className = getClassName(Controller) || getPrefixFromFileName(file);
             const prefix = Controller.$$prefix ?? '/' + getPrefixFromClassName(className, 'Controller').toLowerCase();
             const definedActions = new Set();
+            const definedRoutes = new Set();
 
             // 设置通过装饰器设置的路由
             controller.$$routes && controller.$$routes.forEach(({path, method, action}) => {
+                const route = join(prefix, path);
+
+                definedRoutes.add(route);
                 definedActions.add(action);
-                router[method](join(prefix, path), handleAction(action.bind(controller)));
+                router[method](route, handleAction(action.bind(controller)));
             });
 
             // 设置类中 xxxAction 方法的路由
@@ -58,11 +62,14 @@ const controllers = (options = {}) => {
                 // 装饰器中已经定义的路由不再处理
                 if (!definedActions.has(action)) {
                     // indexAction 可以直接映射
-                    if (name === 'indexAction') {
+                    if (name === 'indexAction' && !definedRoutes.has(prefix) && !definedRoutes.has(join(prefix, '/'))) {
                         router.all(prefix, handleAction(action.bind(controller)));
                     }
+                    const route = join(prefix, name.slice(0, -6));
 
-                    router.all(join(prefix, name.slice(0, -6)), handleAction(action.bind(controller)));
+                    if (!defineActions.has(route)) {
+                        router.all(join(prefix, name.slice(0, -6)), handleAction(action.bind(controller)));
+                    }
                 }
             });
         }

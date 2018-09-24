@@ -6,4 +6,3 @@
 export controllers from './controllers';
 export models from './models';
 export router from './router';
-export Controller from './Controller';
