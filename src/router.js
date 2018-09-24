@@ -11,7 +11,7 @@ const createRouter = methods => {
     };
 
     methods.forEach(method => {
-        router[method] = path => (target, property) => {
+        router[method] = (path = '') => (target, property) => {
             if (!target.$$routes) {
                 target.$$routes = [];
             }
