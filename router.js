@@ -1,8 +1,30 @@
 /**
- * @file 导出 router 装饰器
- * author netcon
+ * Controller 路由装饰器
+ * @param {Array} methods HTTP 方法列表
  */
 
-require("@babel/register");
+const createRouter = methods => {
+    const router = {
+        prefix: prefix => Class => {
+            Class.$$prefix = prefix;
+        }
+    };
 
-module.exports = require('./src/router');
+    methods.forEach(method => {
+        router[method] = path => (target, property) => {
+            if (!target.$$routes) {
+                target.$$routes = [];
+            }
+
+            target.$$routes.push({
+                path,
+                method: method,
+                action: target[property]
+            });
+        }
+    });
+
+    return router;
+};
+
+module.exports = createRouter(['get', 'post', 'put', 'delete', 'all']);
