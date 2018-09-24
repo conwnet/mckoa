@@ -4,7 +4,7 @@
  */
 
 class Controller {
-    normalize(data, errcode, errmsg) {
+    normalize(data, errcode = 0, errmsg = 'OK') {
         return {data, errcode, errmsg};
     }
 }
