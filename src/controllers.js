@@ -67,7 +67,7 @@ const controllers = (options = {}) => {
                     }
                     const route = join(prefix, name.slice(0, -6));
 
-                    if (!defineActions.has(route)) {
+                    if (!definedRoutes.has(route)) {
                         router.all(join(prefix, name.slice(0, -6)), handleAction(action.bind(controller)));
                     }
                 }
